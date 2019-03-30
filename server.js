@@ -31,7 +31,7 @@ app.set("view engine", "handlebars");
 // mongoose.connect("mongodb://localhost/newscraperdb", { useNewUrlParser: true });
 // var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newscraperdb";
 
-mongoose.connect("mongodb://<dbuser>:<dbpassword>@ds237955.mlab.com:37955/heroku_2sn8tw5g");
+mongoose.connect("mongodb://<alex>:<hxVucWpT42XTPCh>@ds237955.mlab.com:37955/heroku_2sn8tw5g");
 
 // Routes
 app.get("/", function (req, res) {
