@@ -1,0 +1,115 @@
+body { 
+background-image: url(../style/backgroundImg.jpg);
+color: rgb(17, 1, 1) !important; 
+}
+#mainTitle {
+    font-size: 55px;
+    text-align: center;
+}
+#bbcLogo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 40%;
+}
+#homeContainer {
+  background:rgba(255,255,255,0.5);
+  height: 800px;
+  text-align: center;
+}
+#homeTitle {
+  margin-top: 20px;
+  margin-bottom: 30px;
+  font-size: 40px;
+  font-weight: bold;
+}
+#homeParagraph {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+#universeImg {
+  height: 300px;
+}
+.logoArticles {
+  margin-top: -60px;
+}
+.sumPar {
+  font-size: 20px;
+}
+#navbar {
+    background-color: black !important;
+}
+.nav-link {
+    color: white !important;
+    font-size: 30px;
+    margin-left: 280px;
+}
+#secTitle {
+    text-align: center;
+    margin-bottom: 40px;
+}
+hr {    background-color: rgb(156, 68, 33); 
+    height: 3px; border: 0;
+}
+#wrapper {
+  width: 960px;
+  margin-top: 50px;
+  margin-bottom: 80px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 5%;
+  padding-left: 30px;
+  padding-right: 30px;
+  background:rgba(255,255,255,0.5);
+
+}
+#articles {
+  display: inline-block;
+  overflow: auto;
+  width: 60%;
+  height: 700px;
+  margin-top: 40px;
+}
+.addNote-btn {
+  float: right;
+  display: absolute;
+  margin-right: 20px;
+  margin-top: 15px;
+  background-color: rgb(67, 87, 67);
+  color: white;
+  padding: 10px;
+  border-radius: 15px;
+  font-size: 14px;
+}
+#notes {
+  float: right;
+  width: 30%;
+}
+textarea, input {
+  display: block;
+  width: 100%;
+  background-color: rgb(36, 47, 143);
+}
+input {
+  height: 36px;
+  font-size: 24px;
+  color: white;
+}
+textarea {
+  height: 0px;
+  font-size: 25px;
+}
+#footerText {
+  font-size: 20px;
+}
+#footer {
+  background-color: black;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  color: white;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
