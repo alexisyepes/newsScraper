@@ -12,3 +12,11 @@ Using Cheerio we grab the news from the BBC website, save them to our Mongo data
 * Express-handlebars (templating handling)
 * Mongoose (Connecting and Managing Mongodb database)
 * Axios and Cheerios (Retrieving and manipulation contents posted in other Portals and Web pages)
+
+Link to the deployed app:
+https://alexyepesnewscraper.herokuapp.com/
+
+
+![Image 1](https://res.cloudinary.com/bootcamp2019/image/upload/v1553993145/screenshotNews.png)
+
+![Image 2](https://res.cloudinary.com/bootcamp2019/image/upload/v1553993157/screenshotNews2.png)
