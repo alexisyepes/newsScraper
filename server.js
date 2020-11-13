@@ -4,6 +4,7 @@ var mongoose = require("mongoose");
 var axios = require("axios");
 var cheerio = require("cheerio");
 var exphbs = require("express-handlebars");
+require("dotenv").config();
 
 // Require all models
 var db = require("./models");
@@ -13,25 +14,31 @@ var PORT = process.env.PORT || 3000;
 // Initialize Express
 var app = express();
 
-
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
 // Make public a static folder
 app.use(express.static("public"));
 
 app.engine(
   "handlebars",
   exphbs({
-    defaultLayout: "main"
+    defaultLayout: "main",
   })
 );
-app.set("view engine", "handlebars");
-// Connect to the Mongo DB
-mongoose.connect("mongodb://alex:hxVucWpT42XTPCh@ds237955.mlab.com:37955/heroku_2sn8tw5g", { useNewUrlParser: true });
-var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newscraperdb";
 
-mongoose.connect(MONGODB_URI);
+app.set("view engine", "handlebars");
+
+// Connect to the Mongo DB
+mongoose.connect(
+  `mongodb+srv://news-scraper:${process.env.MONGO_ATLAS}@cluster0.2ahjw.mongodb.net/news-scraper?retryWrites=true&w=majority`,
+
+  {
+    useUnifiedTopology: true,
+    useNewUrlParser: true,
+  }
+);
 
 // Routes
 app.get("/", function (req, res) {
@@ -41,31 +48,29 @@ app.get("/", function (req, res) {
 // A GET route for scraping the BBC website
 app.get("/scrape", function (req, res) {
   // First, we grab the body of the html with axios
-  axios.get("https://www.bbc.com/news/science_and_environment").then(function (response) {
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
-    var $ = cheerio.load(response.data);
+  axios
+    .get("https://www.bbc.com/news/science_and_environment")
+    .then(function (response) {
+      // Then, we load that into cheerio and save it to $ for a shorthand selector
+      var $ = cheerio.load(response.data);
+      console.log($);
 
-    $(".title-link").each(function (i, element) {
-      var result = {};
+      $(".title-link").each(function (i, element) {
+        var result = {};
 
-      result.title = $(this)
-        .children(".title-link__title")
-        .text();
-      result.link = $(this)
-        .attr("href");
-      result.summary = $(this).next()
-        .text();
+        result.title = $(this).children(".title-link__title").text();
+        result.link = $(this).attr("href");
+        result.summary = $(this).next().text();
 
-      db.Article.create(result)
-        .then(function (dbArticle) {
-        })
-        .catch(function (err) {
-          console.log(err);
-        });
+        db.Article.create(result)
+          .then(function (dbArticle) {})
+          .catch(function (err) {
+            console.log(err);
+          });
+      });
+
+      res.render("index");
     });
-
-    res.render("index");
-  });
 });
 
 app.get("/articles", function (req, res) {
@@ -92,8 +97,11 @@ app.get("/articles/:id", function (req, res) {
 app.post("/articles/:id", function (req, res) {
   db.Note.create(req.body)
     .then(function (dbNote) {
-     
-      return db.Article.findOneAndUpdate({ _id: req.params.id }, { note: dbNote._id }, { new: true });
+      return db.Article.findOneAndUpdate(
+        { _id: req.params.id },
+        { note: dbNote._id },
+        { new: true }
+      );
     })
     .then(function (dbArticle) {
       res.json(dbArticle);
